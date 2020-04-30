@@ -34,4 +34,12 @@ public class Calendar {
     public void setPlannedMeetings(Collection<TimeInterval> plannedMeetings) {
         this.plannedMeetings = plannedMeetings;
     }
+
+    @Override
+    public String toString() {
+        return "{\n" +
+                "\n\t\"workingHours\": " + workingHours +
+                ",\n\t\"plannedMeetings\": " + plannedMeetings +
+                "\n}";
+    }
 }
