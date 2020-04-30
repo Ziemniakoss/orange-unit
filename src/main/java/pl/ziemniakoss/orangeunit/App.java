@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.TemporalAmount;
 import java.util.Collection;
 
 public class App {
@@ -18,9 +17,6 @@ public class App {
 					"\t [cal1] [cal2] [czasSpotkania]");
 			System.exit(1);
 		}
-		LocalTime l = LocalTime.parse("00:30");
-		System.out.println(l.plus(Duration.ofMinutes(30)));
-		System.out.println(l);
 		try {
 			LocalTime duration = LocalTime.parse(args[2]);
 			new App(new JSONCalendarReader()).start(args[0], args[1], duration);

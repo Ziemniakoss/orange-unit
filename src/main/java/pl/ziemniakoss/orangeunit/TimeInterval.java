@@ -4,8 +4,8 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 public class TimeInterval implements Comparable<TimeInterval> {
-	private LocalTime start;
-	private LocalTime end;
+	private final LocalTime start;
+	private final LocalTime end;
 
 	public TimeInterval(String start, String end) {
 		this(LocalTime.parse(start), LocalTime.parse(end));
@@ -31,16 +31,8 @@ public class TimeInterval implements Comparable<TimeInterval> {
 		return start;
 	}
 
-	public void setStart(LocalTime start) {
-		this.start = start;
-	}
-
 	public LocalTime getEnd() {
 		return end;
-	}
-
-	public void setEnd(LocalTime end) {
-		this.end = end;
 	}
 
 	/**
@@ -82,7 +74,7 @@ public class TimeInterval implements Comparable<TimeInterval> {
 
 	/**
 	 * Znajduje wspólną część przedziałów czasowych. Metoda zakłada, że
-	 * <b>{@code interval1} jest {@code interval2}</b>
+	 * <b>{@code interval1} zaczyna się przed {@code interval2}</b>
 	 *
 	 * @return część wspólną lub null gdy takiej nie mają
 	 */

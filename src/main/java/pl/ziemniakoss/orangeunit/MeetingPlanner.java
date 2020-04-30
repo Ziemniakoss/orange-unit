@@ -1,14 +1,13 @@
 package pl.ziemniakoss.orangeunit;
 
 import java.time.Duration;
-import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MeetingPlanner {
 	/**
-	 * Znajduje możliwe przedziały czasowe o długości takiej samej lub dłuższej niż {@code duration}
+	 * Znajduje możliwe przedziały czasowe o długości takiej samej lub dłuższej niż {@code duration}.
 	 *
 	 * @param calendar1 kalendarz pierwszej osoby
 	 * @param calendar2 kalendarz drugiej osoby
@@ -24,10 +23,12 @@ public class MeetingPlanner {
 			return new ArrayList<>();
 		}
 
+		//stwórz posorowaną listę wszystkich spotkań
 		List<TimeInterval> allMeetings = Stream.concat(calendar1.getPlannedMeetings().stream(), calendar2.getPlannedMeetings().stream())
 				.filter(Objects::nonNull)
 				.sorted()
 				.collect(Collectors.toList());
+
 		Stack<TimeInterval> possibleMeetings = new Stack<>();
 		possibleMeetings.push(common);
 		for (int i = 0; i < allMeetings.size() && !possibleMeetings.empty(); i++) {
