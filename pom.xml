@@ -54,6 +54,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <finalName>orangeunit</finalName>
                     <archive>
                         <manifest>
                             <mainClass>pl.ziemniakoss.orangeunit.App</mainClass>

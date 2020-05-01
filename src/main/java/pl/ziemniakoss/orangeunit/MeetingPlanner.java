@@ -3,7 +3,6 @@ package pl.ziemniakoss.orangeunit;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class MeetingPlanner {
 	/**
@@ -23,17 +22,15 @@ public class MeetingPlanner {
 			return new ArrayList<>();
 		}
 
-		//stwórz posorowaną listę wszystkich spotkań
-		List<TimeInterval> allMeetings = Stream.concat(calendar1.getPlannedMeetings().stream(), calendar2.getPlannedMeetings().stream())
-				.filter(Objects::nonNull)
-				.sorted()
-				.collect(Collectors.toList());
+		PriorityQueue<TimeInterval> allMeetings = new PriorityQueue<>();
+		allMeetings.addAll(calendar1.getPlannedMeetings());
+		allMeetings.addAll(calendar2.getPlannedMeetings());
 
 		Stack<TimeInterval> possibleMeetings = new Stack<>();
 		possibleMeetings.push(common);
-		for (int i = 0; i < allMeetings.size() && !possibleMeetings.empty(); i++) {
+		while (!possibleMeetings.isEmpty() && !allMeetings.isEmpty()) {
 			TimeInterval interval = possibleMeetings.pop();
-			TimeInterval[] difference = interval.findDifference(allMeetings.get(i));
+			TimeInterval[] difference = interval.findDifference(allMeetings.poll());
 			for (TimeInterval x : difference) {
 				possibleMeetings.push(x);
 			}

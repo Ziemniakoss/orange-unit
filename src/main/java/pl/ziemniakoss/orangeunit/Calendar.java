@@ -16,7 +16,11 @@ public class Calendar {
         if(plannedMeetings == null){
             this.plannedMeetings = new ArrayList<>();
         }
-        //TODO walidacja czasów spotkań
+        for(TimeInterval meeting : this.plannedMeetings){
+            if(meeting.getStart().isBefore(workingHours.getStart()) || meeting.getEnd().isAfter(workingHours.getEnd())){
+                throw new IllegalArgumentException("Meeting "+meeting+" does not fit in working hours("+ workingHours+")");
+            }
+        }
     }
 
     public TimeInterval getWorkingHours() {

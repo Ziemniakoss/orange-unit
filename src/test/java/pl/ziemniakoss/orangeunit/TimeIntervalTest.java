@@ -80,10 +80,58 @@ class TimeIntervalTest {
 		assertEquals(interval, result[0]);
 	}
 
+	@Test
 	public void findDifferenceSameInputs() {
 		TimeInterval interval = new TimeInterval("04:50", "05:12");
 		TimeInterval[] result = interval.findDifference(interval);
 		assertEquals(0, result.length);
+	}
+
+	@ParameterizedTest
+	@MethodSource
+	public void findDifference(TimeInterval i1, TimeInterval i2, TimeInterval[] expected) {
+		TimeInterval[] result = i1.findDifference(i2);
+		assertArrayEquals(expected,result);
+	}
+
+	public static Stream<Arguments> findDifference() {
+		return Stream.of(
+				Arguments.of(
+						new TimeInterval("10:00", "12:00"),
+						new TimeInterval("10:00", "12:00"),
+						new TimeInterval[0]
+				),
+				Arguments.of(
+						new TimeInterval("10:00", "15:00"),
+						new TimeInterval("10:00", "12:00"),
+						new TimeInterval[]{new TimeInterval("12:00", "15:00")}
+				),
+				Arguments.of(
+						new TimeInterval("13:00", "16:00"),
+						new TimeInterval("14:40", "16:00"),
+						new TimeInterval[]{new TimeInterval("13:00", "14:40")}
+				),
+				Arguments.of(
+						new TimeInterval("09:00", "11:56"),
+						new TimeInterval("11:56", "12:00"),
+						new TimeInterval[]{new TimeInterval("09:00", "11:56")}
+				),
+				Arguments.of(
+						new TimeInterval("05:34", "07:14"),
+						new TimeInterval("16:45", "17:56"),
+						new TimeInterval[]{new TimeInterval("05:34", "07:14")}
+				),
+				Arguments.of(
+						new TimeInterval("10:00", "20:00"),
+						new TimeInterval("12:00", "18:00"),
+						new TimeInterval[]{new TimeInterval("10:00", "12:00"), new TimeInterval("18:00", "20:00")}
+				),
+				Arguments.of(
+						new TimeInterval("12:00", "18:00"),
+						new TimeInterval("10:00", "20:00"),
+						new TimeInterval[0]
+				)
+		);
 	}
 
 
