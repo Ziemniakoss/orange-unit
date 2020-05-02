@@ -49,6 +49,10 @@ public class JSONCalendarReader implements ICalendarReader {
 		}
 		String fileContent = Files.readAllLines(inFile).stream().collect(Collectors.joining(System.lineSeparator()));
 		JSONObject json = new JSONObject(fileContent);
+		return read(json);
+	}
+
+	public Calendar read(JSONObject json){
 		if (!json.has("working_hours")) {
 			throw new IllegalArgumentException("json's field working_hours is required");
 		}
@@ -56,7 +60,6 @@ public class JSONCalendarReader implements ICalendarReader {
 		Collection<TimeInterval> meetings = extractMeetings(json);
 		return new Calendar(workingHours, meetings);
 	}
-
 	/**
 	 * Zamienia obiekt json na TimeInterval. Obiekt JSON musi mieć dwa pola:
 	 * <ul>

@@ -1,0 +1,16 @@
+{
+  "cal1":{
+	"working_hours": {
+	  "start": "06:00",
+	  "end": "16:00"
+	}
+  },
+  "cal2": {
+	"working_hours": {
+	  "start": "17:00",
+	  "end": "18:30"
+	}
+  },
+  "expected": [  ],
+  "duration": "00:30"
+}
