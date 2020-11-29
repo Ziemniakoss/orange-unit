@@ -21,9 +21,9 @@ W folderze target powinien poswtać orangeunit-jar-with-dependencies.jar z wszsy
 ## Uruchamianie
 
 Zakładając, że jesteśmy w głównym folderze
-``
+```
 java -jar target/orangeunit-jar-with-dependencies.jar kalendarz1.json kalendarz2.json 00:30
-``
+```
 Pierwsze dwa parametry to pliki z kalendarzami. Trzeci parametr to długość spotkania w formacie
 "hh:mm".
 
